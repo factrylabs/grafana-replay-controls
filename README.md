@@ -24,6 +24,6 @@ See https://grafana.com/docs/grafana/latest/installation/configuration/#disable-
 
 1. Add a panel of type 'text' to a new or existing dashboard
 2. Set the panel mode to **html**
-3. Paste the content.
+3. Paste the content of replay-control.html in the text area.
 4. (re)play!
 
