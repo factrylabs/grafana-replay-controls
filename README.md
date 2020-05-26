@@ -4,6 +4,8 @@ The scripts in this repository can be used to add replay functionality to a graf
 
 It has been tested in Grafana 6.x and 7.x.
 
+![](img/grafana-replay-controls.gif)
+
 Check out a demo of these controls [here](https://demo.factry.io/d/ZhjweprWk/city-water-tank-flowchart) (in combination with the [grafana flowcharting plugin](https://grafana.com/grafana/plugins/agenty-flowcharting-panel)).
 
 ## How to use
