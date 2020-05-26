@@ -1,0 +1,94 @@
+<script>
+
+  let timeSrv = angular.element('grafana-app').injector().get('timeSrv');
+  let play_mode = false
+  let play_interval = 1
+  let reverse = false
+  
+  function play() {
+    reverse = false
+    play_mode = true
+    removeAllActiveClasses()
+    setActiveClass('btn-play')
+    console.log('play!')
+  }
+  
+  function pause() {
+    play_mode = false
+    removeAllActiveClasses()
+    setActiveClass('btn-pause')
+    console.log('pause!')
+  }
+  
+  function play_reverse() {
+    reverse = true
+    play_mode = true
+    removeAllActiveClasses()
+    setActiveClass('btn-play-rev')
+    console.log('reverse!')
+  }
+
+  function increaseTime() {
+    if (!play_mode) return
+    let from = timeSrv.timeRange().from
+    let to = timeSrv.timeRange().to
+    
+    if (reverse) {
+      timeSrv.setTime({from: from.add(-play_interval, 'seconds'), to: to.add(-play_interval, 'seconds')});
+    } else {
+      timeSrv.setTime({from: from.add(play_interval, 'seconds'), to: to.add(play_interval, 'seconds')});
+    }
+    
+  }
+  
+  function removeAllActiveClasses() {
+    document.getElementById('btn-play-rev').classList.remove('btn-active')
+    document.getElementById('btn-pause').classList.remove('btn-active')
+    document.getElementById('btn-play').classList.remove('btn-active')
+  }
+
+  function setActiveClass(btn) {
+    document.getElementById(btn).classList.add('btn-active')
+  }
+  
+  window.setInterval(increaseTime, 1000)
+  
+</script>
+
+<style type="text/css">
+  .btn-active {
+    background-color: #25cd93;
+  }
+  .btn-active:hover {
+    background-color: #009f77;
+  }
+</style>
+
+<div class="gf-form-inline">
+  
+  <div class="gf-form">
+    <button id="btn-play-rev" class="gf-form-label gf-form-label--btn" onclick="play_reverse()"><i class="fa fa-backward"></i>️</button>
+  </div>
+  <div class="gf-form">
+    <button id="btn-pause" class="gf-form-label gf-form-label--btn btn-active" onclick="pause()"><i class="fa fa-pause"></i></button>
+  </div>
+  <div class="gf-form">
+    <button id="btn-play" class="gf-form-label gf-form-label--btn" onclick="play()"><i class="fa fa-forward"></i></button>
+  </div>
+
+  <div class="gf-form">
+    <div class="gf-form-label">speed</div>
+    <div class="gf-form-select-wrapper">
+      <select class="gf-form-input ng-pristine ng-valid ng-not-empty" id="play-speed" onchange="play_interval = this.options[this.selectedIndex].value">
+        <option value="1">1x</option>
+        <option value="5">5x</option>
+        <option value="10">10x</option>
+        <option value="50">50x</option>
+        <option value="100">100x</option>
+        <option value="500">500x</option>
+        <option value="1000">1000x</option>
+      </select>
+    </div>
+  </div>
+  
+</div>
