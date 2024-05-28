@@ -1,3 +1,5 @@
+⚠️ **DEPRECATED**: This script no longer works in Grafana >10.2, see [here](https://github.com/factrylabs/grafana-replay-controls/issues/3).
+
 # Grafana Replay Controls ⏪⏸⏩
 
 The scripts in this repository can be used to add replay functionality to a grafana dashboard. It basically calls the Javascript of the grafana time controls and sets the time based on the replay speed and direction.
